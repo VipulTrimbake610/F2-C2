@@ -119,7 +119,7 @@ response.then(function(data){
         
         function searching(searchedValue){
             return arr.filter(function(e,i){
-                if(e.name.includes(searchedValue) || e.symbol.includes(searchedValue)){
+                if((e.name).toLowerCase().includes(searchedValue.toLowerCase()) || (e.symbol).toLowerCase().includes(searchedValue.toLowerCase())){
                     return true;
                 }
                 return false;
@@ -132,24 +132,25 @@ response.then(function(data){
             let main = document.getElementById("main");
             main.innerHTML = "";
             
-            let newdiv = document.createElement("div");
-            newdiv.className = "box";
-            main.appendChild(newdiv);
-            newdiv.innerHTML = ` <div class="name">
-            <div class="logo"></div>
-            <div class="logoname"></div>
-            </div>
-            <div class="sf"></div>
-            <div class="price"></div>
-            <div class="lprice"></div>
-            <div class="per"></div>
-            <div class="mkt"></div>`;
+           
             
-            // let searchedValue = e.target.value;
-            // let filteredUsers = searching(searchedValue);
-            // console.log(filteredUsers.length);
+            let searchedValue = e.target.value;
+            let filteredUsers = searching(searchedValue);
             // if(filteredUsers.length >= 1){
-                arr.forEach(function(element,i){
+                
+                filteredUsers.forEach(function(element,i){
+                    let newdiv = document.createElement("div");
+                    newdiv.className = "box";
+                    main.appendChild(newdiv);
+                    newdiv.innerHTML = ` <div class="name">
+                    <div class="logo"></div>
+                    <div class="logoname"></div>
+                    </div>
+                    <div class="sf"></div>
+                    <div class="price"></div>
+                    <div class="lprice"></div>
+                    <div class="per"></div>
+                    <div class="mkt"></div>`;
                     const logo = document.getElementsByClassName("logo")[i];
                     logo.innerHTML = `<img src="${element.image}" alt="">`
                     console.log(logo.innerHTML);
